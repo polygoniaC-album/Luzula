@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Luzula/telon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Luzula/princeps.gd" type="Script" id=2]
+[ext_resource path="res://Luzula/img/particle.png" type="Texture" id=3]
+[ext_resource path="res://Luzula/UI/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Luzula/particle.gd" type="Script" id=5]
+
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0.54902, 1, 1, 0, 0.54902, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 35.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.5
+color_ramp = SubResource( 2 )
+
+[node name="princeps" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="telon" parent="." instance=ExtResource( 1 )]
+layer = 2
+
+[node name="UI" parent="." instance=ExtResource( 4 )]
+
+[node name="particle" type="Particles2D" parent="."]
+z_index = 200
+emitting = false
+amount = 50
+lifetime = 4.0
+local_coords = false
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
+script = ExtResource( 5 )

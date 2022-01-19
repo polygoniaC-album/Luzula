@@ -1,0 +1,420 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Luzula/UI/scene_panneau.gd" type="Script" id=1]
+[ext_resource path="res://Luzula/img/croix_hover.png" type="Texture" id=2]
+[ext_resource path="res://Luzula/img/croix_normal.png" type="Texture" id=3]
+[ext_resource path="res://Luzula/font/default_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Luzula/UI/menu_scene.gd" type="Script" id=5]
+[ext_resource path="res://Luzula/img/CheckBox_unchecked.png" type="Texture" id=6]
+[ext_resource path="res://Luzula/UI/UI.gd" type="Script" id=7]
+[ext_resource path="res://Luzula/img/CheckBox_checked.png" type="Texture" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+shadow_offset = Vector2( 50, 50 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 20.0
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 20.0
+shadow_offset = Vector2( 50, 50 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id=8]
+content_margin_left = 10.0
+content_margin_right = 10.0
+
+[sub_resource type="Theme" id=9]
+default_font = ExtResource( 4 )
+Button/colors/font_color = Color( 0, 0, 0, 1 )
+Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
+Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 3 )
+CheckBox/constants/hseparation = 20
+CheckBox/icons/checked = ExtResource( 8 )
+CheckBox/icons/unchecked = ExtResource( 6 )
+CheckBox/styles/hover = SubResource( 4 )
+CheckBox/styles/hover_pressed = SubResource( 4 )
+CheckBox/styles/normal = SubResource( 5 )
+CheckBox/styles/pressed = SubResource( 5 )
+Label/colors/font_color = Color( 0, 0, 0, 1 )
+ScrollContainer/styles/bg = SubResource( 6 )
+VScrollBar/styles/grabber = SubResource( 7 )
+VScrollBar/styles/grabber_highlight = SubResource( 7 )
+VScrollBar/styles/grabber_pressed = SubResource( 7 )
+VScrollBar/styles/scroll = SubResource( 8 )
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource( 7 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+theme = SubResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="panneau" type="ColorRect" parent="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1918.83
+margin_right = 1.1665
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fermeture" type="TextureButton" parent="Control/panneau"]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 80.1389
+margin_bottom = 80.0
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="animation" type="Tween" parent="Control/panneau"]
+
+[node name="menu_scene" type="Control" parent="Control/panneau"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/panneau/menu_scene"]
+margin_left = 150.0
+margin_top = 50.0
+margin_right = 1780.0
+grow_horizontal = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button_sauvegarde" type="Button" parent="Control/panneau/menu_scene"]
+margin_left = 1080.0
+margin_top = 950.0
+margin_right = 1380.0
+margin_bottom = 1030.0
+text = "Sauvegarde"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu_licence" type="Button" parent="Control/panneau/menu_scene"]
+visible = false
+margin_left = 650.0
+margin_top = 950.0
+margin_right = 950.0
+margin_bottom = 1030.0
+text = "Licence"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button_aide" type="CheckBox" parent="Control/panneau/menu_scene"]
+margin_left = 1450.0
+margin_top = 950.0
+margin_right = 1685.0
+margin_bottom = 1030.0
+text = "Aide"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu_licence" type="Control" parent="Control/panneau"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/panneau/menu_licence"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 150.0
+margin_top = 150.0
+margin_right = -150.0
+margin_bottom = -150.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/panneau/menu_licence/ScrollContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1590.0
+margin_bottom = 17474.0
+rect_min_size = Vector2( 1570, 0 )
+text = "Scénario, dialogue, art : Copytight (c) Quynh-Anh Nguyen, Olivier Batard - All right reserved
+Musique : Copyright (c) Cyrille Garnier - All right reserved
+
+
+Le code de ce jeu est disponible sous licence MIT :
+
+Copyright (c) 2021 Olivier BATARD
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+\"Software\"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+************************************************************************
+******************************* Escoria ********************************
+************************************************************************
+
+Copyright (c) 2012-2016 Juan Linietsky, Ariel Manzur.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+\"Software\"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+************************************************************************
+
+
+
+************************************************************************
+***************************** Godot Engine *****************************
+************************************************************************
+
+Ce jeu utilise Godot Engine, disponible sous la licence suivante :
+
+Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Contributeurs du moteur Godot.
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the “Software”), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+************************************************************************
+
+
+
+************************************************************************
+***************************** The FreeType *****************************
+************************************************************************
+
+Portions of this software are copyright © 2021 The FreeType Project (www.freetype.org). All rights reserved.
+
+
+************************************************************************
+
+
+
+************************************************************************
+********************************* ENet *********************************
+************************************************************************
+
+Ce jeu utilise ENet, disponible sous la licence suivante :
+
+Copyright (c) 2002-2020 Lee Salzman
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the “Software”), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+************************************************************************
+
+
+
+************************************************************************
+******************************* Mbed TLS *******************************
+************************************************************************
+
+Ce jeu utilise Mbed TLS, disponible sous la licence suivante :
+
+Copyright The Mbed TLS Contributors
+
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+************************************************************************
+
+
+
+************************************************************************
+*********************** codeandweb.texturepacker ***********************
+************************************************************************
+
+Ce jeu utilise texturepacker, disponible sous la licence suivante :
+
+The MIT License (MIT)
+=====================
+
+Copyright © 2018 Andreas Löw / CodeAndWeb GmbH
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the “Software”), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+************************************************************************"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu_scene" type="Button" parent="Control/panneau/menu_licence"]
+margin_left = 1442.77
+margin_top = 954.27
+margin_right = 1689.77
+margin_bottom = 1028.27
+text = "Retour"
+
+[node name="Control" type="Control" parent="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

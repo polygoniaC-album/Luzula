@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+
+func _ready():
+	extraction()
+	fichier_matrice()
+	
+	get_tree().quit()
+
+func extraction():
+	print(\"début : extraction\")
+	
+	var dir = Directory.new()
+	if dir.open(\"res://scene/\") == OK:
+		dir.list_dir_begin()
+		var file_name:String = dir.get_next()
+		while file_name != \"\":
+			if !(file_name == \".\" || file_name == \"..\"):
+				if file_name.substr(0,3) == \"ink\":
+					add_child(load(\"res://scene/\" + file_name).instance())
+			file_name = dir.get_next()
+	
+	var dict = {}
+	for child in get_children():
+		var dict_scene = {\"pl\":{}, \"btn\":{}}
+		recherche(child, dict_scene)
+		dict[child.get_filename()] = dict_scene
+	
+	var file:File = File.new()
+	file.open(\"res://tools/extraction\", File.WRITE)
+	
+	for scene in dict:
+		file.store_line(\"###\" + scene)
+		file.store_line(\"\")
+		file.store_line(\"##Label\")
+		for label in dict[scene][\"pl\"]:
+			file.store_line(\"\")
+			file.store_line(\"#\" + label)
+			file.store_line(dict[scene][\"pl\"][label])
+		file.store_line(\"\")
+		file.store_line(\"##Bouton\")
+		for boutton in dict[scene][\"btn\"]:
+			file.store_line(\"\")
+			file.store_line(\"#\" + boutton)
+			for line in dict[scene][\"btn\"][boutton]:
+				file.store_line(line)
+		
+		file.store_line(\"\")
+		file.store_line(\"\")
+	file.close()
+	
+	print(\"fin : extraction\")
+
+func recherche(node, dict):
+	if \"text\" in node:
+		dict[\"pl\"][node.name] = \"text|\" + node.text
+	elif \"text_souvenir\" in node:
+		dict[\"btn\"][node.name] = []
+		dict[\"btn\"][node.name].append(\"text_souvenir|\" + node.text_souvenir)
+		dict[\"btn\"][node.name].append(\"scene|\" + node.scene)
+	else:
+		for child in node.get_children():
+			recherche(child, dict)
+
+func fichier_matrice():
+	print(\"début : fichier matrice\")
+	
+	var dict_matrice = {}
+	
+	var file:File = File.new()
+	file.open(\"res://tools/extraction\", File.READ)
+	var line:String = file.get_line()
+	var scene:int = 0
+	var switch_btn:bool = false
+	while !file.eof_reached():
+		if line.substr(0,3) == \"###\":
+			scene = line.to_int()
+			dict_matrice[scene] = []
+		elif line.substr(0,2) == \"##\":
+			switch_btn = line == \"##Bouton\"
+		elif line.substr(0,5) == \"scene\":
+			if switch_btn:
+				dict_matrice[scene].append(line.to_int())
+		line = file.get_line()
+	file.close()
+	
+	file = File.new()
+	file.open(\"res://data/matrice\", File.WRITE)
+	
+	for scene in dict_matrice:
+		line = \"\"
+		for i in range(31):
+			var n:int = i + 1
+			if n in dict_matrice[scene]:
+				line += '1'
+			else:
+				line += '0'
+			if n < 31:
+				line += ','
+		file.store_line(line)
+	file.close()
+	
+	print(\"fin : fichier matrice\")
+"
+
+[node name="Node" type="Node"]
+script = SubResource( 1 )

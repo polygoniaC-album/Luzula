@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+
+extends Sprite
+
+var dnd:bool = false
+var prox:bool = false
+
+var r:float = 40
+var oldPos:Vector2
+
+func _ready():
+	oldPos = position
+
+func set_text_n(n:int):
+	texture = load(\"res://UI/icon/ink\" + global.str2(n) + \"_normal.png\")
+
+func _process(delta):
+	if Engine.editor_hint:
+		if oldPos != position:
+			oldPos = position
+	else:
+		if dnd:
+			global_position = get_global_mouse_position()
+	if global_position.distance_squared_to(get_global_mouse_position()) <= r * r:
+		prox = true
+		scale = Vector2.ONE
+	else:
+		prox = false
+		scale = 0.5 * Vector2.ONE
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			if prox:
+				dnd = true
+				get_tree().set_input_as_handled()
+		else:
+			dnd = false
+"
+
+[node name="vertice" type="Sprite"]
+scale = Vector2( 0.4, 0.4 )
+script = SubResource( 1 )
+v_lock = 1
+h_lock = 1
